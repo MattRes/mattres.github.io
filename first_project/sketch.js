@@ -1,5 +1,5 @@
-// Project Title
-// Your Name
+// 1942 
+// Matthew Resendes
 // Date
 //
 // Extra for Experts:
@@ -31,4 +31,8 @@ function draw() {
   image(plane, mouseX, mouseY, plane.width*scaler, plane.height*scaler );
   imageMode(CENTER);
   noCursor();
+}
+function startScreen(){
+  background(0);
+   
 }
