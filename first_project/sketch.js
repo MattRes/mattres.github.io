@@ -6,10 +6,13 @@
 // - describe what you did to take this project "above and beyond"
 
 let plane;
-let scaler = 1
-
+let rocket;
+let rocketY;
+let w;
+let s;
 function preload(){
   plane = loadImage("assets/1942_SmallRed_Plane.png");
+  rocket = loadImage("assets/rocket.png");
 }
 
 function setup() {
@@ -18,21 +21,25 @@ function setup() {
 
 function draw() {
   background(0);
+  controls()
 
+}
+
+function controls(){
+  image(plane, mouseX, mouseY, 100, 100 );
+  imageMode(CENTER);
+  shoot();
+  noCursor();
+
+}
+
+function shoot(){
   if (keyIsPressed){
-    if (keyCode === UP_ARROW){
-      scaler *= 1.1;
-    }
-    else if (keyCode === DOWN_ARROW){
-      scaler /= 1.1; 
+    if (key === "w"){
+      image(rocket, mouseX, mouseY, 60, 60);
+      imageMode(CENTER);
+      console.log("Shot");
+      
     }
   }
-
-  image(plane, mouseX, mouseY, plane.width*scaler, plane.height*scaler );
-  imageMode(CENTER);
-  noCursor();
-}
-function startScreen(){
-  background(0);
-   
 }
