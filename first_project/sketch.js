@@ -36,7 +36,7 @@ function controls(){
 function shoot(){
   if (keyIsPressed){
     if (key === "w"){
-      image(rocket, mouseX, mouseY, 60, 60);
+      image(rocket, pmouseX, pmouseY - 40, 60, 60);
       imageMode(CENTER);
       console.log("Shot");
       

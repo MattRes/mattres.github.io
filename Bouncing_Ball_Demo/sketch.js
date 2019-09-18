@@ -18,7 +18,6 @@ function preload(){
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  
   dx = random(-15,15);
   yx = random(-15,15);
   x = width/2;
