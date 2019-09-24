@@ -25,6 +25,7 @@ function setup() {
 
 
 function draw() {
+  mainMenu();
   background(0);
   controls();
   enemies();
@@ -59,4 +60,13 @@ function enemies(){
     
   }
 
+}
+//Creates Main Menu
+function mainMenu(){
+  background(45);
+  textsize(25);
+  textAlign(CENTER);
+  text("Pilot", width/2, height/2 - 50)
+  text("Start", width/2, height/2)
+  
 }
