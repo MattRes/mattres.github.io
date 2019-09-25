@@ -32,5 +32,5 @@ function mainMenu(){
   rect(width/2, height/2 + 190, 200, 55);
   fill(255, 0, 0);
   text("Options", width/2, height/2 + 200);
-  
+
 }
