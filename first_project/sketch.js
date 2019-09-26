@@ -1,115 +1,143 @@
-// 1942 
+// Pilot inspired by 1942
 // Matthew Resendes
-// 25th September 2019
-//
-// Extra for Experts:
-// - describe what you did to take this project "above and beyond"
+// September 25th, 2019
+// Extra for experts- I attempted to add a wav audio clip but I kept getting a P5 loadSound() not defined. I researched and put the p5 sound library in my JS folder
 
-//Important global variables
+//Global Variables needed for the program
+let screen;
 let plane;
 let rocketX, rocketY;
 let enemyRad; 
-let enemyX, enemyY, enemyYx
-let screen;
+let enemyX, enemyY, enemyYx;
+let pew;
 
-//Loads images in for use
 function preload(){
+  //Loads images in for the program
   plane = loadImage("assets/1942_SmallRed_Plane.png");
   rocket = loadImage("assets/rocket.png");
 }
-
-// Sets everything up for the program
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(900, 600);
   enemyX = random(width);
   enemyY = 0;
-  rocketY = mouseY;
-  rocketX = mouseX;
-  screen = mainMenu;
+  screen = "mainMenu";
 }
 
-//Main Loop
 function draw() {
-  screenDisplay()
-  background(0);
-  controls();
-  enemies();
-  console.log(mouseX, mouseY);
+  screenDisplay();
+  mousePressed();
+  gameLoop(); 
 }
 
 function screenDisplay() {
+  //Changes screen/state
   if (screen === "mainMenu"){
     background(45)
-    titleDisplay();
+    menuDisplay();
   }
   if (screen === "game") {
     background(45);
   }
-  if (screen === "options"){
+  if (screen === "optionMenu"){
     background(45);
     optionsDisplay();
   }
 }
-function menuButtons() {
-  // Buttons for title screen
-  if (mouseX > 650 && mouseX < 950 && mouseY > 345 && mouseY < 445) {
-    screen = "game";
-    clear();
-  }
-  if (mouseX > 650 && mouseX < 950 && mouseY > 475 && mouseY < 575) {
-    screen = "options";
-    clear();
-  }
-}
 
-
-// Main controls for the plane 
-function controls(){
-  image(plane, mouseX, mouseY, 100, 100 );
-  imageMode(CENTER);
-  shoot();
-  noCursor();
-}
-
-//Main shooting function
-function shoot(){
-  if (keyIsPressed){
-    if (key === "w"){
-      image(rocket, rocketX, rocketY - 40, 60, 60);
-      imageMode(CENTER);
-      console.log("Shot");
+function mousePressed() {
+  if (mouseIsPressed) {
+    // Main menu Buttons
+    if (screen === "mainMenu") {
+      menuButtons();
+    }
+    // Options menu Buttons
+    if (screen === "optionMenu") {
+      optionsButtons();
     }
   }
 }
-//Spawns enemies at Y axis (0) and moves them downwards to plane
-function enemies(){
-  enemyrad = 25;
-  enemyyx = 3;
-  circle(enemyX, enemyY + enemyRad/2, enemyrad, enemyrad);
-  enemyY = enemyY + enemyyx; 
-  if (enemyY > abs(height)){
 
+function gameLoop() {
+  // Displays the Character and allowes movement controls
+  if (screen === "game") {
+      background(45);
+      image(plane, mouseX, mouseY, 100, 100 );
+      imageMode(CENTER);
+      shoot();
+      noCursor();
+      enemies();
   }
 }
-//Creates Main Menu
-function mainMenu(){
-  background(45);
-  textSize(55);
-  textAlign(CENTER);
-  fill(255, 0, 0);
-  text("Pilot", width/2, height/2 - 150);
-  textSize(30);
-  fill(0,0,125);
-  rectMode(CENTER);
-  rect(width/2, height/2 + 115, 200, 55);
-  fill(255, 0, 0);
-  text("Start", width/2, height/2 + 125);
-  fill(0,0,125);
-  rect(width/2, height/2 + 190, 200, 55);
-  fill(255, 0, 0);
-  text("Options", width/2, height/2 + 200);
-  
+function shoot(){
+  //WIP Spawns rocket at front of plane (does not launch yet)
+  rocketY = mouseY;
+  rocketX = mouseX;
+  if (keyIsPressed){
+    if (key === "w"){
+      image(rocket, rocketX,rocketY - 50, 60, 60);
+      imageMode(CENTER);
+    }
+  }
 }
-function options(){
-  clear()
+
+function enemies(){
+  //WIP Creates enemy (does not die or do damage yet)
+  enemyRad = 25;
+  enemyyx = 3;
+  circle(enemyX, enemyY + enemyRad/2, enemyRad, enemyRad);
+  enemyY = enemyY + enemyyx; 
+}
+
+function menuDisplay() {
+  // Display for menu Screen
+  background(45);
+  fill(255, 165, 0);
+  rectMode(CENTER);
+  rect(450,350, 200, 75);
+  rect(450, 450, 200, 75);
+  fill(0)
+  textAlign(CENTER, TOP);
+  textSize(20);
+  text("Options", 450, 440);
+  text("Start", 450, 340);
+  textSize(100);
+  text("Pilot", 450, 100);
+  textSize(15);
+  text("Created by: Matthew Resendes", 450, 550);
+
+}
+
+function menuButtons() {
+  // Buttons for menu screen
+  if (mouseX > 350 && mouseX < 550 && mouseY > 345 && mouseY < 445) {
+    screen = "game";
+    clear();
+  }
+  if (mouseX > 350 && mouseX < 550 && mouseY > 410 && mouseY < 485) {
+    screen = "optionMenu";
+    clear();
+  }
+}
+
+function optionsDisplay() {
+  // WIP Displays option choices (much more to come)
+  fill(0);
+  textSize(100);
+  text("Options", 450, 100);
+  fill(255,0,0);
+  rectMode(CENTER);
+  rect(450, 500, 100, 50);
+  textSize(20)
+  fill(0)
+  textAlign(CENTER);
+  text("Back", 450, 490);
+  console.log(mouseX,mouseY);
+}
+
+function optionsButtons() {
+  // WIP Buttons for options screen (much more to come)
+  if (mouseX > 400 && mouseX < 500 && mouseY > 475 && mouseY < 525) {
+    screen = "mainMenu";
+    clear();
+  }
 }

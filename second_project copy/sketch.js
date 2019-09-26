@@ -55,10 +55,12 @@ function mousePressed() {
 function controls() {
   // Displays the Character and allowes movement controls
   if (screen === "game") {
+      background(45);
       image(plane, mouseX, mouseY, 100, 100 );
       imageMode(CENTER);
       shoot();
       noCursor();
+      console.log("Start Button")
 }
 }
 
@@ -109,7 +111,7 @@ function optionsDisplay() {
 
 function titleButtons() {
   // Buttons for title screen
-  if (mouseX > 650 && mouseX < 950 && mouseY > 345 && mouseY < 445) {
+  if (mouseX > 550 && mouseX < 350 && mouseY > 445 && mouseY < 345) {
     screen = "game";
     clear();
   }
@@ -121,7 +123,7 @@ function titleButtons() {
 
 function optionsButtons() {
   // Buttons for options screen
-  if (mouseX > 650 && mouseX < 950 && mouseY > 605 && mouseY < 705) {
+  if (mouseX > 650 && mouseX < 950 && mouseY > 310 && mouseY < 390) {
     screen = "mainMenu";
   }
   if (mouseX > 845 && mouseX < 895 && mouseY > 235 && mouseY < 265) {
