@@ -76,6 +76,7 @@ function shoot(){
     if (key === "w"){
       image(rocket, rocketX,rocketY - 50, 60, 60);
       imageMode(CENTER);
+
     }
   }
 }
