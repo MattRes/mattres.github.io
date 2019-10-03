@@ -83,7 +83,7 @@ function gameLoop() {
       textSize(50);
       text("Life: "+ playerHealth, 75, 25)
       if (playerHealth <= 0){
-        screen = "mainMenu";
+        screen = "endScreen";
         clear();
       }
   }
@@ -119,6 +119,7 @@ function enemies(){
 
 function menuDisplay() {
   // Display for menu Screen
+  noStroke();
   cursor(ARROW);
   background(45);
   fill(255, 165, 0);
@@ -134,17 +135,18 @@ function menuDisplay() {
   text("Pilot", 450, 100);
   textSize(15);
   text("Created by: Matthew Resendes", 450, 550);
+  console.log(mouseX, mouseY);
 
 }
 
 function menuButtons() {
   // Buttons for menu screen
-  if (mouseX > 350 && mouseX < 550 && mouseY > 345 && mouseY < 445) {
+  if (mouseX > 350 && mouseX < 550 && mouseY > 310 && mouseY < 390) {
     screen = "game";
     playerHealth = 3;
     clear();
   }
-  if (mouseX > 350 && mouseX < 550 && mouseY > 410 && mouseY < 485) {
+  if (mouseX > 350 && mouseX < 550 && mouseY > 410 && mouseY < 490) {
     screen = "optionMenu";
     clear();
   }
@@ -190,25 +192,26 @@ function optionsButtons() {
 
 
 
-// function endScreenDisplay() {
-//   image(gameOver, width/2, height/2, width, height);
-//   fill(255,0,0);
-//   text("Game Over", 450, 300);
+function endScreenDisplay() {
+  clear()
+  image(gameOver, width/2, height/2, width, height);
+  fill(255,0,0);
+  text("Game Over", 450, 300);
 
-//   // Main menu back button
-//   fill(0);
-//   rect(width/2, height/2 + 125, 100, 50);
-//   fill(255);
-//   textSize(15);
-//   text("Main Menu", width/2, height/2 + 125)
-//   cursor(ARROW);
-//   console.log(mouseX, mouseY);
-//   }
+  // Main menu back button
+  fill(0);
+  rect(width/2, height/2 + 125, 75, 30);
+  fill(255);
+  textSize(15);
+  text("Main Menu", width/2, height/2 + 120)
+  cursor(ARROW);
+  console.log(mouseX, mouseY);
+  }
   
   
-//   function endScreenButtons() {
-//   if (mouseX > 400 && mouseX < 500 && mouseY > 375 && mouseY < 425) {
-//     screen = "mainMenu";
-//     clear();
-//     }
-//   }
+  function endScreenButtons() {
+    if (mouseX > 410 && mouseX < 490 && mouseY > 410 && mouseY < 440) {
+      screen = "mainMenu";
+      clear();
+    }
+  }
