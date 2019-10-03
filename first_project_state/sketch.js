@@ -19,11 +19,11 @@ function preload(){
   //Loads images in for the program
   plane = loadImage("assets/1942_SmallRed_Plane.png");
   rocket = loadImage("assets/rocket.png");
-  gameOver = loadImage("assets/Gameover.jpg")
+  gameOver = loadImage("assets/Gameover.jpg");
+  pew = loadSound("assets/pew.wav");
 }
 function setup() {
   createCanvas(900, 600);
-  playerHealth = 3;
   enemyX = random(width);
   enemyY = 0;
   screen = "mainMenu";
@@ -48,6 +48,9 @@ function screenDisplay() {
     background(45);
     optionsDisplay();
   }
+  if (screen === "endScreen"){
+    endScreenDisplay();
+  }
 }
 
 function mousePressed() {
@@ -59,6 +62,9 @@ function mousePressed() {
     // Options menu Buttons
     if (screen === "optionMenu") {
       optionsButtons();
+    }
+    if (screen === "endScreen"){
+      endScreenButtons();
     }
   }
 }
@@ -75,12 +81,8 @@ function gameLoop() {
       textSize(50);
       text(playerHealth, 25, 25)
       if (playerHealth <= 0){
-        clear()
-        image(gameOver, width/2, height/2, width, height);
-        fill(255,0,0);
-        text("Game Over", 450, 300);
-        fill(0);
-        rect(width/2, height/2 + 100, 100, 50);
+        screen = "endScreen";
+        clear();
       }
   }
 }
@@ -93,6 +95,7 @@ function shoot(){
     if (key === "w"){
       image(rocket, rocketX,rocketY - 50, 60, 60);
       imageMode(CENTER);
+      pew.play();
     }
   }
 }
@@ -135,6 +138,7 @@ function menuButtons() {
   // Buttons for menu screen
   if (mouseX > 350 && mouseX < 550 && mouseY > 345 && mouseY < 445) {
     screen = "game";
+    playerHealth = 3;
     clear();
   }
   if (mouseX > 350 && mouseX < 550 && mouseY > 410 && mouseY < 485) {
@@ -176,3 +180,26 @@ function optionsButtons() {
     rect(width/2 + 35, height/2 , 50, 25);
   }
   }
+
+//   function endScreenDisplay(){
+//     // Displays loss screen
+//     image(gameOver, width/2, height/2, width, height);
+//     fill(255,0,0);
+//     text("Game Over", 450, 300);
+
+//     // Main menu back button
+//     fill(0);
+//     rect(width/2, height/2 + 100, 100, 50);
+//     fill(255);
+//     textSize(15);
+//     text("Main Menu", width/2, height/2 + 95)
+//     cursor(ARROW);
+//     console.log(mouseX, mouseY);
+// }
+//   function endScreenButtons(){
+//     //Buttons for the loss screen
+//     if (mouseX > 400 && mouseX < 500 && mouseY > 375 && mouseY < 425) {
+//       screen = "mainMenu";
+//       console.log(screen);
+//   }
+// }
