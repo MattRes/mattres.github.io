@@ -6,6 +6,7 @@
 //Global Variables needed for the program
 let screen;
 let plane;
+let enemyPlane; 
 let gameOver;
 let rocketX, rocketY;
 let enemyRad; 
@@ -21,10 +22,11 @@ function preload(){
   rocket = loadImage("assets/rocket.png");
   gameOver = loadImage("assets/Gameover.jpg");
   pew = loadSound("assets/pew.wav");
+  enemyPlane = loadImage("assets/enemyPlane.png");
 }
 function setup() {
   createCanvas(900, 600);
-  enemyX = random(width);
+  enemyX = random(width - 37.5);
   enemyY = 0;
   screen = "mainMenu";
 }
@@ -79,9 +81,9 @@ function gameLoop() {
       noCursor();
       enemies();
       textSize(50);
-      text(playerHealth, 25, 25)
+      text("Life: "+ playerHealth, 75, 25)
       if (playerHealth <= 0){
-        screen = "endScreen";
+        screen = "mainMenu";
         clear();
       }
   }
@@ -104,7 +106,7 @@ function enemies(){
   //WIP Creates enemy (does not die or do damage yet)
   enemyRad = 25;
   enemyyx = 3;
-  circle(enemyX, enemyY + enemyRad/2, enemyRad, enemyRad);
+  image(enemyPlane, enemyX, enemyY + enemyRad/2, 75,75);
   enemyY = enemyY + enemyyx; 
   if (enemyY > 600){
     enemyY = 0;
@@ -117,6 +119,7 @@ function enemies(){
 
 function menuDisplay() {
   // Display for menu Screen
+  cursor(ARROW);
   background(45);
   fill(255, 165, 0);
   rectMode(CENTER);
@@ -181,25 +184,31 @@ function optionsButtons() {
   }
   }
 
-//   function endScreenDisplay(){
-//     // Displays loss screen
-//     image(gameOver, width/2, height/2, width, height);
-//     fill(255,0,0);
-//     text("Game Over", 450, 300);
 
-//     // Main menu back button
-//     fill(0);
-//     rect(width/2, height/2 + 100, 100, 50);
-//     fill(255);
-//     textSize(15);
-//     text("Main Menu", width/2, height/2 + 95)
-//     cursor(ARROW);
-//     console.log(mouseX, mouseY);
-// }
-//   function endScreenButtons(){
-//     //Buttons for the loss screen
-//     if (mouseX > 400 && mouseX < 500 && mouseY > 375 && mouseY < 425) {
-//       screen = "mainMenu";
-//       console.log(screen);
+
+
+
+
+
+// function endScreenDisplay() {
+//   image(gameOver, width/2, height/2, width, height);
+//   fill(255,0,0);
+//   text("Game Over", 450, 300);
+
+//   // Main menu back button
+//   fill(0);
+//   rect(width/2, height/2 + 125, 100, 50);
+//   fill(255);
+//   textSize(15);
+//   text("Main Menu", width/2, height/2 + 125)
+//   cursor(ARROW);
+//   console.log(mouseX, mouseY);
 //   }
-// }
+  
+  
+//   function endScreenButtons() {
+//   if (mouseX > 400 && mouseX < 500 && mouseY > 375 && mouseY < 425) {
+//     screen = "mainMenu";
+//     clear();
+//     }
+//   }
