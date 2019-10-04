@@ -33,7 +33,6 @@ function setup() {
 
 function draw() {
   screenDisplay();
-  mousePressed();
   gameLoop(); 
 }
 
@@ -55,20 +54,18 @@ function screenDisplay() {
   }
 }
 
-function mousePressed() {
-  if (mouseIsPressed) {
+function mouseClicked() {
     // Main menu Buttons
     if (screen === "mainMenu") {
       menuButtons();
     }
     // Options menu Buttons
-    if (screen === "optionMenu") {
+    else if (screen === "optionMenu") {
       optionsButtons();
     }
-    if (screen === "endScreen"){
+    else if (screen === "endScreen"){
       endScreenButtons();
     }
-  }
 }
 
 function gameLoop() {
@@ -186,12 +183,6 @@ function optionsButtons() {
   }
   }
 
-
-
-
-
-
-
 function endScreenDisplay() {
   clear()
   image(gameOver, width/2, height/2, width, height);
@@ -212,6 +203,5 @@ function endScreenDisplay() {
   function endScreenButtons() {
     if (mouseX > 410 && mouseX < 490 && mouseY > 410 && mouseY < 440) {
       screen = "mainMenu";
-      clear();
     }
   }
