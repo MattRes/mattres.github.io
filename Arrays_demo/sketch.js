@@ -16,7 +16,10 @@ function draw() {
     shapes[i].y += shapes[i].dy;
     fill(shapes[i].color);
     ellipse(shapes[i].x, shapes[i].y, shapes[i].radius*2, shapes[i].radius*2)
+  if (shapes.length >= 10){
+    shapes.shift();
   }
+}
 }
 
 function mousePressed(){
@@ -25,10 +28,9 @@ function mousePressed(){
     y: mouseY,
     radius: random(10, 45),
     color: color(random(255), random(255), random(255), random(255)),
-    dy: 20
+    dy: 5
   };
   shapes.push(someShape);
-  if (shapes <= 10){
-    shape.pop;
+
   }
-}
+

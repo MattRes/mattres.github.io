@@ -6,7 +6,7 @@
 //Global Variables needed for the program
 let screen;
 let plane;
-let enemyPlane; 
+let enemyPlane;
 let gameOver;
 let rocketX, rocketY;
 let enemyRad; 
@@ -15,6 +15,7 @@ let pew;
 let soundOnOff;
 let enemyHealth; 
 let playerHealth;
+
 
 function preload(){
   //Loads images in for the program
@@ -29,6 +30,7 @@ function setup() {
   enemyX = random(width - 37.5);
   enemyY = 0;
   screen = "mainMenu";
+  soundOnOff = true;
 }
 
 function draw() {
@@ -113,7 +115,6 @@ function enemies(){
   console.log(mouseX, mouseY);
   }
 
-
 function menuDisplay() {
   // Display for menu Screen
   noStroke();
@@ -163,7 +164,7 @@ function optionsDisplay() {
   textAlign(CENTER);
   text("Back", 450, 490);
 
-  //Sound button/On
+  //Sound buttonOnOff
   fill(255,0,0);
   rect(width/2 + 35, height/2 , 50, 25);
   fill(0);
@@ -177,11 +178,14 @@ function optionsButtons() {
     screen = "mainMenu";
     clear();
   }
+  //Sound Button
   if (mouseX > 460 && mouseX < 510 && mouseY > 290 && mouseY < 315){
     fill(0, 255, 0);
     rect(width/2 + 35, height/2 , 50, 25);
+    console.log("SoundButton");
+    }
   }
-  }
+
 
 function endScreenDisplay() {
   clear()
@@ -205,3 +209,4 @@ function endScreenDisplay() {
       screen = "mainMenu";
     }
   }
+
