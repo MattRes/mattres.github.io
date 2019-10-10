@@ -9,6 +9,7 @@ let plane;
 let enemyPlane;
 let gameOver;
 let rocketX, rocketY;
+
 let enemyRad; 
 let enemyX, enemyY, enemyYx;
 let pew;
@@ -107,7 +108,7 @@ function enemies(){
   enemyyx = 3;
   image(enemyPlane, enemyX, enemyY + enemyRad/2, 75,75);
   enemyY = enemyY + enemyyx; 
-  if (enemyY > 600){
+  if (enemyY > height){
     enemyY = 0;
     enemyX = random(width);
     playerHealth = playerHealth- 1;
@@ -122,18 +123,19 @@ function menuDisplay() {
   background(45);
   fill(255, 165, 0);
   rectMode(CENTER);
-  rect(450,350, 200, 75);
-  rect(450, 450, 200, 75);
+  rect(width/2, height/2 + 50, 200, 75);
+  rect(width/2, height/2 + 150, 200, 75);
   fill(0)
   textAlign(CENTER, TOP);
   textSize(20);
-  text("Options", 450, 440);
-  text("Start", 450, 340);
+  text("Options", width/2, 440);
+  text("Start", width/2, 340);
   textSize(100);
-  text("Pilot", 450, 100);
+  text("Pilot", width/2, 100);
   textSize(15);
-  text("Created by: Matthew Resendes", 450, 550);
+  text("Created by: Matthew Resendes", width/2 , height - 50);
   console.log(mouseX, mouseY);
+
 
 }
 
