@@ -9,7 +9,8 @@ let plane;
 let enemyPlane;
 let gameOver;
 let rocketX, rocketY;
-
+let enemy ={
+}
 let enemyRad; 
 let enemyX, enemyY, enemyYx;
 let pew;
