@@ -6,12 +6,16 @@
 //Global Variables needed for the program
 let screen;
 let plane;
-let enemyPlane;
+
 let gameOver;
 let rocketX, rocketY;
-
-let enemyRad; 
-let enemyX, enemyY, enemyYx;
+let enemy = {
+  x: 0,
+  y: 0,
+  yx: 0,
+  rad: 0,
+  plane:0
+}
 let pew;
 let soundOnOff;
 let enemyHealth; 
@@ -24,12 +28,12 @@ function preload(){
   rocket = loadImage("assets/rocket.png");
   gameOver = loadImage("assets/Gameover.jpg");
   pew = loadSound("assets/pew.wav");
-  enemyPlane = loadImage("assets/enemyPlane.png");
+  enemy.plane = loadImage("assets/enemyPlane.png");
 }
 function setup() {
   createCanvas(900, 600);
-  enemyX = random(width - 37.5);
-  enemyY = 0;
+  enemy.x = random(width - 37.5);
+  enemy.y = 0;
   screen = "mainMenu";
   soundOnOff = true;
 }
@@ -104,13 +108,13 @@ function shoot(){
 
 function enemies(){
   //WIP Creates enemy (does not die or do damage yet)
-  enemyRad = 25;
-  enemyyx = 3;
-  image(enemyPlane, enemyX, enemyY + enemyRad/2, 75,75);
-  enemyY = enemyY + enemyyx; 
-  if (enemyY > height){
-    enemyY = 0;
-    enemyX = random(width);
+  enemy.rad = 25;
+  enemy.yx = 3;
+  image(enemy.plane, enemy.x, enemy.y + enemy.rad/2, 75,75);
+  enemy.y = enemy.y + enemy.yx; 
+  if (enemy.y > height){
+    enemy.y = 0;
+    enemy.x = random(width - 37.5);
     playerHealth = playerHealth- 1;
   }
   console.log(mouseX, mouseY);
