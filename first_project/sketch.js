@@ -21,6 +21,7 @@ let pew;
 let soundOnOff;
 let enemyHealth; 
 let playerHealth;
+let mainBackground;
 
 
 function preload(){
@@ -33,6 +34,7 @@ function preload(){
 }
 function setup() {
   createCanvas(900, 600);
+  mainBackground = 45;
   enemy.x = random(width - 37.5);
   enemy.y = 0;
   screen = "mainMenu";
@@ -47,14 +49,14 @@ function draw() {
 function screenDisplay() {
   //Changes screen/state
   if (screen === "mainMenu"){
-    background(45)
+    background(mainBackground);
     menuDisplay();
   }
   if (screen === "game") {
-    background(45);
+    background(mainBackground);
   }
   if (screen === "optionMenu"){
-    background(45);
+    background(mainBackground);
     optionsDisplay();
   }
   if (screen === "endScreen"){
@@ -170,6 +172,9 @@ function menuButtons() {
   }
 }
 
+function characterSelectDisplay(){
+
+}
 function optionsDisplay() {
   // WIP Displays option choices (much more to come)
   fill(0);
