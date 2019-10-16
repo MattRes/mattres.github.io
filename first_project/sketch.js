@@ -106,16 +106,19 @@ function shoot(){
     height: 90,
     speed: 5
   };
+  //if W pushed it'll fire a rocket
+  //MILLIS DOESN'T WORK!!!!!!!
   if (keyIsPressed){
     if (key === "w"){
       imageMode(CENTER);
       pew.play();
-      rockets.push(thisRocket);
+      rockets.push(thisRocket); 
     }
   }
 }
 
 function updateRockets(){
+  //Updates rockets in the array
   for (let thisRocket of rockets){
     thisRocket.y += thisRocket.speed * -1;
     image(rocket, thisRocket.x, thisRocket.y, thisRocket.width, thisRocket.height);
@@ -140,7 +143,7 @@ function menuDisplay() {
   // Display for menu Screen
   noStroke();
   cursor(ARROW);
-  background(45);
+  background(mainBackground);
   fill(255, 165, 0);
   rectMode(CENTER);
   rect(width/2, height/2 + 50, 200, 75);
@@ -173,8 +176,27 @@ function menuButtons() {
 }
 
 function characterSelectDisplay(){
+  let size = 150
+  background(mainBackground);
+  rectMode(CENTER);
+  //top left square
+  rect(width/4, height/3, size, size)
+  //top right square
+  rect(width - width/4, height/3, size, size)
+  //bot right square
+  rect(width - width/4, height - height/3, size, size)
+  //bot left square
+  rect(width/4, height - height/3, size, size)
+  //top mid square
+  rect(width/2, height/3, size, size)
+  //bot mid square
+  rect(width/2, height - height/3, size, size)
+}
+
+function characterSelectButtons(){
 
 }
+
 function optionsDisplay() {
   // WIP Displays option choices (much more to come)
   fill(0);
@@ -230,6 +252,7 @@ function endScreenDisplay() {
   
   
   function endScreenButtons() {
+    //Main menu return button
     if (mouseX > 410 && mouseX < 490 && mouseY > 410 && mouseY < 440) {
       screen = "mainMenu";
     }
