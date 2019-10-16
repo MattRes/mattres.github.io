@@ -9,6 +9,7 @@ let plane;
 
 let gameOver;
 let rocketX, rocketY;
+let rockets = [];
 let enemy = {
   x: 0,
   y: 0,
@@ -86,6 +87,7 @@ function gameLoop() {
       enemies();
       textSize(50);
       text("Life: "+ playerHealth, 75, 25)
+      updateRockets();
       if (playerHealth <= 0){
         screen = "endScreen";
         clear();
@@ -94,16 +96,28 @@ function gameLoop() {
 }
 
 function shoot(){
-  //WIP Spawns rocket at front of plane (does not launch yet)
-  rocketY = mouseY;
-  rocketX = mouseX;
+  //WIP Spawns rocket at front of plane (Finally launches!)
+  let thisRocket = {
+    y: mouseY,
+    x: mouseX, 
+    width: 70,
+    height: 90,
+    speed: 5
+  };
   if (keyIsPressed){
     if (key === "w"){
-      image(rocket, rocketX,rocketY - 50, 60, 60);
       imageMode(CENTER);
       pew.play();
+      rockets.push(thisRocket);
     }
   }
+}
+
+function updateRockets(){
+  for (let thisRocket of rockets){
+    thisRocket.y += thisRocket.speed * -1;
+    image(rocket, thisRocket.x, thisRocket.y, thisRocket.width, thisRocket.height);
+}
 }
 
 function enemies(){
