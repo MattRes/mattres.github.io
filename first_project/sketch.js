@@ -6,9 +6,7 @@
 //Global Variables needed for the program
 let screen;
 let plane;
-
 let gameOver;
-let rocketX, rocketY;
 let rockets = [];
 let enemy = {
   x: 0,
@@ -18,7 +16,6 @@ let enemy = {
   plane:0
 }
 let pew;
-let soundOnOff;
 let enemyHealth; 
 let playerHealth;
 let mainBackground;
@@ -38,7 +35,8 @@ function setup() {
   enemy.x = random(width - 37.5);
   enemy.y = 0;
   screen = "mainMenu";
-  soundOnOff = true;
+  fpsOnOff = "off";
+  soundOnOff = "on";
 }
 
 function draw() {
@@ -87,6 +85,7 @@ function gameLoop() {
       shoot();
       noCursor();
       enemies();
+      updatefps();
       updateLife();
       updateRockets();
       if (playerHealth <= 0){
@@ -128,8 +127,10 @@ function shoot(){
   if (keyIsPressed){
     if (key === "w"){
       imageMode(CENTER);
-      pew.play();
       rockets.push(thisRocket); 
+      if (soundOnOff === "On"){
+        pew.play();
+      }
     }
   }
 }
@@ -139,10 +140,18 @@ function updateRockets(){
   for (let thisRocket of rockets){
     thisRocket.y += thisRocket.speed * -1;
     image(rocket, thisRocket.x, thisRocket.y, thisRocket.width, thisRocket.height);
-  if (rockets.length >= 10){
+  //takes care of lag ensuring there is never more than 10 rockets
+    if (rockets.length >= 10){
     rockets.shift();
   }
 }
+}
+
+function updatefps(){
+  if (fpsOnOff === "on")
+    textSize(15);
+    fill(0);
+    text("FPS:" + round(frameRate()), width - 30, height - 15)
 }
 
 function enemies(){
@@ -177,7 +186,7 @@ function menuDisplay() {
   text("Pilot", width/2, 100);
   textSize(15);
   text("Created by: Matthew Resendes", width/2 , height - 50);
-  console.log(mouseX, mouseY);
+  console.log();
 
 
 }
@@ -197,20 +206,21 @@ function menuButtons() {
 
 function characterSelectDisplay(){
   let size = 150
+  let characterSize = size/2;
   background(mainBackground);
   rectMode(CENTER);
-  //top left square
-  rect(width/4, height/3, size, size)
-  //top right square
-  rect(width - width/4, height/3, size, size)
-  //bot right square
-  rect(width - width/4, height - height/3, size, size)
-  //bot left square
-  rect(width/4, height - height/3, size, size)
-  //top mid square
-  rect(width/2, height/3, size, size)
-  //bot mid square
-  rect(width/2, height - height/3, size, size)
+  imageMode(CENTER);
+  //Far left
+  rect(width/3, height/2, size, size);
+  // image(fileName, width/3, height/2, characterSize);
+
+  //Mid
+  rect(width/2, height/2, size, size);
+  // image(fileName, width/2, height/2, characterSize);
+
+  //Far right
+  rect(width - width/3, height/2, size, size);
+  // image(fileName, width -width/3, height/2, characterSize);
 }
 
 function characterSelectButtons(){
@@ -219,7 +229,6 @@ function characterSelectButtons(){
 
 function optionsDisplay() {
   // WIP Displays option choices (much more to come)
-  soundOnOff = "On";
   fill(0);
   textSize(100);
   text("Options", 450, 100);
@@ -235,10 +244,28 @@ function optionsDisplay() {
   //Sound buttonOnOff
   fill(0);
   text("Sound" , width/2 - 35, height/2 - 10);
-  if (soundOnOff === "On")
+  if (soundOnOff === "on"){
+    fill(0,255,0);
+    rect(width/2 + 35, height/2 , 50, 25);
+  }
+  else if (soundOnOff === "off"){
     fill(255,0,0);
-  else if (soundOnOff === "off")
-  rect(width/2 + 35, height/2 , 50, 25);
+    rect(width/2 + 35, height/2 , 50, 25);
+  }
+  //Display FPS button
+  fill(0,0,0);
+  text("FPS", width/2 -35, height/2 +30);
+  rect(width/2 + 35, height/2 + 40, 50, 25);
+  if (fpsOnOff === "on"){
+    fill(0,255,0);
+    rect(width/2 + 35, height/2 + 40, 50, 25);
+  }
+  else if (fpsOnOff === "off"){
+    fill(255,0,0);
+    rect(width/2 + 35, height/2 + 40, 50, 25);
+  }
+  console.log(fpsOnOff);
+  console.log(soundOnOff);
   console.log(mouseX,mouseY);
 }
 
@@ -250,15 +277,28 @@ function optionsButtons() {
   }
   //Sound Button
   if (mouseX > 460 && mouseX < 510 && mouseY > 290 && mouseY < 315){
-    fill(0, 255, 0);
-    rect(width/2 + 35, height/2 , 50, 25);
+    // changes button state
+    if (soundOnOff === "on"){
+      soundOnOff = "off";
+    }
+    else if (soundOnOff === "off"){
+      soundOnOff = "on";
+    }
     console.log("SoundButton");
     }
+    //fps button
+    if (mouseX > 460 && mouseX < 510 && mouseY > 325 && mouseY < 350){
+      if (fpsOnOff === "on"){
+        fpsOnOff = "off";
+      }
+      else if (fpsOnOff === "off"){
+        fpsOnOff = "on";
+      }
+    } 
   }
 
 
 function endScreenDisplay() {
-  clear()
   image(gameOver, width/2, height/2, width, height);
   fill(255,0,0);
   text("Game Over", 450, 300);
