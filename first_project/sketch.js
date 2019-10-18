@@ -243,7 +243,7 @@ function optionsDisplay() {
   textAlign(CENTER);
   text("Back", 450, 490);
 
-  //Sound buttonOnOff
+  //Display Sound buttonOnOff
   fill(0);
   text("Sound" , width/2 - 35, height/2 - 10);
   if (soundOnOff === "on"){
@@ -254,7 +254,7 @@ function optionsDisplay() {
     fill(255,0,0);
     rect(width/2 + 35, height/2 , 50, 25);
   }
-  //Display FPS button
+  //Display FPS buttonOnOff
   fill(0,0,0);
   text("FPS", width/2 -35, height/2 +30);
   rect(width/2 + 35, height/2 + 40, 50, 25);
@@ -303,6 +303,7 @@ function optionsButtons() {
 function endScreenDisplay() {
   image(gameOver, width/2, height/2, width, height);
   fill(255,0,0);
+  textSize(40);
   text("Game Over", 450, 300);
 
   // Main menu back button
