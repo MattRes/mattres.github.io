@@ -19,7 +19,8 @@ let pew;
 let enemyHealth; 
 let playerHealth;
 let mainBackground;
-
+let fpsOnOff;
+let soundOnOff;
 
 function preload(){
   //Loads images in for the program
@@ -148,10 +149,11 @@ function updateRockets(){
 }
 
 function updatefps(){
-  if (fpsOnOff === "on")
+  if (fpsOnOff === "on"){
     textSize(15);
     fill(0);
-    text("FPS:" + round(frameRate()), width - 30, height - 15)
+    text("FPS:" + round(frameRate()), width - 30, height - 15);
+  }
 }
 
 function enemies(){
