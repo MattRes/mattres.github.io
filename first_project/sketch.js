@@ -87,8 +87,7 @@ function gameLoop() {
       shoot();
       noCursor();
       enemies();
-      textSize(50);
-      text("Life: "+ playerHealth, 75, 25)
+      updateLife();
       updateRockets();
       if (playerHealth <= 0){
         screen = "endScreen";
@@ -96,6 +95,24 @@ function gameLoop() {
       }
   }
 }
+
+function updateLife(){
+  textSize(50);
+  fill(0, 255,0);
+  if (playerHealth === 3){
+    fill(0,255,0);
+    text("Life: "+ playerHealth, 75, 25);
+  }
+  if (playerHealth === 2){
+    fill(255,165,0)
+    text("Life: "+ playerHealth, 75, 25);
+  }
+  else if (playerHealth === 1){
+    fill(255,0,0);
+    text("Life: "+ playerHealth, 75, 25);
+  }
+}
+
 
 function shoot(){
   //WIP Spawns rocket at front of plane (Finally launches!)
@@ -122,6 +139,9 @@ function updateRockets(){
   for (let thisRocket of rockets){
     thisRocket.y += thisRocket.speed * -1;
     image(rocket, thisRocket.x, thisRocket.y, thisRocket.width, thisRocket.height);
+  if (rockets.length >= 10){
+    rockets.shift();
+  }
 }
 }
 
@@ -199,6 +219,7 @@ function characterSelectButtons(){
 
 function optionsDisplay() {
   // WIP Displays option choices (much more to come)
+  soundOnOff = "On";
   fill(0);
   textSize(100);
   text("Options", 450, 100);
@@ -212,10 +233,12 @@ function optionsDisplay() {
   text("Back", 450, 490);
 
   //Sound buttonOnOff
-  fill(255,0,0);
-  rect(width/2 + 35, height/2 , 50, 25);
   fill(0);
   text("Sound" , width/2 - 35, height/2 - 10);
+  if (soundOnOff === "On")
+    fill(255,0,0);
+  else if (soundOnOff === "off")
+  rect(width/2 + 35, height/2 , 50, 25);
   console.log(mouseX,mouseY);
 }
 
