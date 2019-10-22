@@ -97,6 +97,7 @@ function gameLoop() {
 }
 
 function updateLife(){
+  //Updates life and life text color
   textSize(50);
   fill(0, 255,0);
   if (playerHealth === 3){
@@ -124,13 +125,13 @@ function shoot(){
     speed: 5
   };
   //if W pushed it'll fire a rocket
-  //MILLIS DOESN'T WORK!!!!!!!
   if (keyIsPressed){
     if (key === "w"){
       imageMode(CENTER);
       rockets.push(thisRocket); 
-      if (soundOnOff === "On"){
+      if (soundOnOff === "on"){
         pew.play();
+        console.log("pew");
       }
     }
   }
@@ -142,13 +143,14 @@ function updateRockets(){
     thisRocket.y += thisRocket.speed * -1;
     image(rocket, thisRocket.x, thisRocket.y, thisRocket.width, thisRocket.height);
   //takes care of lag ensuring there is never more than 10 rockets
-    if (rockets.length >= 10){
+    if (rockets.length >= 20){
     rockets.shift();
   }
 }
 }
 
 function updatefps(){
+  //Updates fps if enabled
   if (fpsOnOff === "on"){
     textSize(15);
     fill(0);
@@ -207,6 +209,7 @@ function menuButtons() {
 }
 
 function characterSelectDisplay(){
+  //WIP currently not used in program yet
   let size = 150
   let characterSize = size/2;
   background(mainBackground);
@@ -226,7 +229,7 @@ function characterSelectDisplay(){
 }
 
 function characterSelectButtons(){
-
+// WIP currently not used in program yet
 }
 
 function optionsDisplay() {
@@ -301,6 +304,7 @@ function optionsButtons() {
 
 
 function endScreenDisplay() {
+  //Displays end screen
   image(gameOver, width/2, height/2, width, height);
   fill(255,0,0);
   textSize(40);
