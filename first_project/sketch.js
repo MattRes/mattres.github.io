@@ -1,8 +1,7 @@
 // Pilot inspired by 1942
 // Matthew Resendes
-// September 25th, 2019
-// Extra for experts- I attempted to add a wav audio clip but I kept getting a P5 loadSound() not defined. I researched and put the p5 sound library in my JS folder
-
+// October 21, 2019
+// Extra for Experts, AI
 //Global Variables needed for the program
 let screen;
 let plane;
