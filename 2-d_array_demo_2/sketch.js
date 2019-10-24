@@ -9,7 +9,12 @@ let rows = 30;
 let cols = 30;
 
 function setup() {
-  createCanvas(800, 800);
+  if (windowWidth > windowHeight){
+    createCanvas(windowHeight,windowHeight);
+  }
+  else {
+    createCanvas(windowWidth, windowWidth);
+  }
   grid = createRandom2dArray(cols, rows);
 }
 
@@ -18,9 +23,22 @@ function draw() {
   displayGrid(grid, rows, cols);
 }
 
+function windowResized()
+  if (windowWidth > windowHeight){
+    createCanvas(windowHeight,windowHeight);
+}
+  else {
+    createCanvas(windowWidth, windowWidth);
+}
 function keyTyped(){
+  if (key === "r"){
+    grid = createRandom2dArray(cols, rows);
+  }
   if (key === "c"){
-    grid[xCoord][yCoord] = 0;
+    for (let x = 0; x < cols; x ++){
+      for (let y = 0; y < rows; y++)
+        grid[y][x] = 1;
+    }
   }
 }
 
