@@ -5,11 +5,16 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 let grid = [];
-let snake = {
-  x: 0,
-  y: 0
+let snakeHead = {
+  x: 10,
+  y: 10
 };
 let snakebody = []; 
+let xCoord;
+let yCoord;
+let cellSize;
+let fruit;
+let score;
 
 function setup() {
   if (windowWidth > windowHeight) {
@@ -18,18 +23,23 @@ function setup() {
   else {
     createCanvas(windowWidth, windowWidth);
   }
-  grid = create2dArray(20, 20);
+  grid = create2dArray(21, 21);
+  cellSize = width / grid[0].length;
+
 }
 
 function draw() {
   background(220);
   displayGrid(grid);
+  fill(125,125,124);
+  console.log(xCoord, yCoord);
+  updateFruit();
 }
 
 
 function keyTyped() {
   if (key === "w") {
-    // Move snake up
+    //Move snake up
   }
   if (key === "s") {
     // Move snake down
@@ -48,10 +58,14 @@ function displayGrid(theGrid) {
   for (let y = 0; y < theGrid[0].length; y++) {
     for (let x = 0; x < theGrid[0].length; x++) {
         fill(255);
-      let cellSize = width / theGrid[0].length;
       rect(x * cellSize, y * cellSize, cellSize, cellSize);
+      fill(125,125,125);
+      xCoord = floor(mouseX / cellSize);
+      yCoord = floor(mouseY / cellSize);
     }
   }
+  rect(10 * cellSize, 10 * cellSize, cellSize, cellSize);
+  fill(0);
 }
 
 function create2dArray(cols, rows) {
@@ -72,4 +86,12 @@ function create2dArray(cols, rows) {
 
 function detectEdge(){
   //Detects snake and edge
+  //Display Score and game over
+}
+
+function updateFruit(){
+  let randomGridVal = 0;
+  fill(0);
+  rect(theGrid[10],theGrid[10], cellSize, cellSize);
+  console.log("ran");
 }
