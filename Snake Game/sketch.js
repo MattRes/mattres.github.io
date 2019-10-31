@@ -4,17 +4,13 @@
 //
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
-let grid = [];
-let snakeHead = {
-  x: 10,
-  y: 10
-};
-let snakebody = []; 
-let xCoord;
-let yCoord;
-let cellSize;
-let fruit;
-let score;
+// WASD in Grid Demo
+
+let grid;
+let rows = 30;
+let cols = 30;
+let playerX = 15;
+let playerY = 15;
 
 function setup() {
   if (windowWidth > windowHeight) {
@@ -23,75 +19,68 @@ function setup() {
   else {
     createCanvas(windowWidth, windowWidth);
   }
-  grid = create2dArray(21, 21);
-  cellSize = width / grid[0].length;
-
+  grid = createEmptyGrid(cols, rows);
+  grid[playerY][playerX] = 1;
 }
 
 function draw() {
   background(220);
-  displayGrid(grid);
-  fill(125,125,124);
-  console.log(xCoord, yCoord);
-  updateFruit();
+  displayGrid(grid, rows, cols);
 }
 
-
-function keyTyped() {
-  if (key === "w") {
-    //Move snake up
+function windowResized() {
+  if (windowWidth > windowHeight) {
+    createCanvas(windowHeight, windowHeight);
   }
-  if (key === "s") {
-    // Move snake down
-  }
-  if (key === "a") {
-    //Move snake left
-  }
-  if (key === "d") {
-    //Move snake right
+  else {
+    createCanvas(windowWidth, windowWidth);
   }
 }
+function keyPressed() {
+  // remove player from current spot
+  grid[playerY][playerX] = 0;
 
+  // move the player
+  if (key === "w" && playerY > 0) {
+    playerY -= 1;
+  }
+  if (key === "s" && playerY < rows - 1) {
+    playerY += 1;
+  }
 
-function displayGrid(theGrid) {
-  //assumes the grid is a square...
-  for (let y = 0; y < theGrid[0].length; y++) {
-    for (let x = 0; x < theGrid[0].length; x++) {
-        fill(255);
-      rect(x * cellSize, y * cellSize, cellSize, cellSize);
-      fill(125,125,125);
-      xCoord = floor(mouseX / cellSize);
-      yCoord = floor(mouseY / cellSize);
+  if (key === "d" && playerX < cols - 1) {
+    playerX += 1;
+  }
+
+  if (key === "a" && playerX > 0) {
+    playerX -= 1;
+  }
+  // put player back into grid
+  grid[playerY][playerX] = 1;
+}
+
+function createEmptyGrid() {
+  let emptyGrid = [];
+  for (let x = 0; x < cols; x++) {
+    emptyGrid.push([]);
+    for (let y = 0; y < rows; y++) {
+      emptyGrid[x].push(0);
     }
   }
-  rect(10 * cellSize, 10 * cellSize, cellSize, cellSize);
-  fill(0);
+  return emptyGrid;
 }
 
-function create2dArray(cols, rows) {
-  let someArray = [];
-  for (let i=0; i<cols; i++) {
-    someArray.push([]);
-    for (let j=0; j<rows; j++) {
-      if (random(100) < 50) {
-        someArray[i].push(1);
+function displayGrid(grid, rows, cols) {
+  let cellSize = width / cols;
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < cols; x++) {
+      if (grid[y][x] === 0) {
+        fill(255);
       }
       else {
-        someArray[i].push(0);
+        fill(0);
       }
+      rect(x*cellSize, y*cellSize, cellSize, cellSize);
     }
   }
-  return someArray;
-}
-
-function detectEdge(){
-  //Detects snake and edge
-  //Display Score and game over
-}
-
-function updateFruit(){
-  let randomGridVal = 0;
-  fill(0);
-  rect(theGrid[10],theGrid[10], cellSize, cellSize);
-  console.log("ran");
 }
