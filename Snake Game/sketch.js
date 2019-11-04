@@ -11,8 +11,13 @@ let rows = 30;
 let cols = 30;
 let playerX = 15;
 let playerY = 15;
-
+let fruit = {};
 function setup() {
+  fruit = {
+    x: floor(random(0, 30)),
+    y: floor(random(0, 30))
+  };
+  
   if (windowWidth > windowHeight) {
     createCanvas(windowHeight, windowHeight);
   }
@@ -21,11 +26,14 @@ function setup() {
   }
   grid = createEmptyGrid(cols, rows);
   grid[playerY][playerX] = 1;
+  grid[fruit.x][fruit.y] = 2;
 }
+
 
 function draw() {
   background(220);
   displayGrid(grid, rows, cols);
+  updatefruit();
 }
 
 function windowResized() {
@@ -77,6 +85,9 @@ function displayGrid(grid, rows, cols) {
       if (grid[y][x] === 0) {
         fill(255);
       }
+      else if (grid[y][x] === 2){
+        fill(255,0,0);
+      }
       else {
         fill(0);
       }
@@ -84,3 +95,13 @@ function displayGrid(grid, rows, cols) {
     }
   }
 }
+
+
+function updatefruit(){
+  grid[fruit.x][fruit.y];
+  if (grid[fruit.x][fruit.y] === grid[playerX][playerY]){
+    fruit.x = floor(random(0, 30));
+    fruit.y = floor(random(0, 30));
+    grid[fruit.x][fruit.y];
+  }
+};
