@@ -16,6 +16,15 @@ let cellSize;
 let fruit;
 let score;
 
+<<<<<<< HEAD
+=======
+let grid;
+let rows = 30;
+let cols = 30;
+let playerX = 15;
+let playerY = 15;
+
+>>>>>>> parent of 99ad4c1... Snake game fruit spawning
 function setup() {
   if (windowWidth > windowHeight) {
     createCanvas(windowHeight, windowHeight);
@@ -23,6 +32,7 @@ function setup() {
   else {
     createCanvas(windowWidth, windowWidth);
   }
+<<<<<<< HEAD
   grid = create2dArray(21, 21);
   cellSize = width / grid[0].length;
 
@@ -34,6 +44,15 @@ function draw() {
   fill(125,125,124);
   console.log(xCoord, yCoord);
   updateFruit();
+=======
+  grid = createEmptyGrid(cols, rows);
+  grid[playerY][playerX] = 1;
+}
+
+function draw() {
+  background(220);
+  displayGrid(grid, rows, cols);
+>>>>>>> parent of 99ad4c1... Snake game fruit spawning
 }
 
 
@@ -68,6 +87,7 @@ function displayGrid(theGrid) {
   fill(0);
 }
 
+<<<<<<< HEAD
 function create2dArray(cols, rows) {
   let someArray = [];
   for (let i=0; i<cols; i++) {
@@ -75,12 +95,21 @@ function create2dArray(cols, rows) {
     for (let j=0; j<rows; j++) {
       if (random(100) < 50) {
         someArray[i].push(1);
+=======
+function displayGrid(grid, rows, cols) {
+  let cellSize = width / cols;
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < cols; x++) {
+      if (grid[y][x] === 0) {
+        fill(255);
+>>>>>>> parent of 99ad4c1... Snake game fruit spawning
       }
       else {
         someArray[i].push(0);
       }
     }
   }
+<<<<<<< HEAD
   return someArray;
 }
 
@@ -94,4 +123,6 @@ function updateFruit(){
   fill(0);
   rect(theGrid[10],theGrid[10], cellSize, cellSize);
   console.log("ran");
+=======
+>>>>>>> parent of 99ad4c1... Snake game fruit spawning
 }
