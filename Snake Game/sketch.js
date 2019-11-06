@@ -7,19 +7,20 @@
 // WASD in Grid Demo
 
 let grid;
-let rows = 30;
-let cols = 30;
+let rows = 60;
+let cols = 60;
 let snakeX = 15;
 let snakeY = 15;
+let snake = [];
 let fruit = {};
 let direction;
 
 function setup() {
   fruit = {
-    x: floor(random(0, 30)),
-    y: floor(random(0, 30))
+    x: floor(random(0, rows)),
+    y: floor(random(0, cols))
   };
-  
+
   if (windowWidth > windowHeight) {
     createCanvas(windowHeight, windowHeight);
   }
@@ -37,7 +38,9 @@ function draw() {
   background(220);
   displayGrid(grid, rows, cols);
   updatefruit();
-  //updateMovement();
+  updateMovement();
+  console.log(fruit.x, fruit.y);
+  console.log(direction);
 }
 
 function windowResized() {
@@ -50,29 +53,25 @@ function windowResized() {
 }
 function keyPressed() {
   // remove player from current spot
-  grid[snakeX][snakeY] = 0;
-
-  // move the player
-  if (key === "w" && snakeY > 0) {
-    snakeY -=1
+  if (key === "w") {
     direction = "up";
+    //snakeY -= 1;
   }
-  if (key === "s" && snakeY < rows - 1) {
+  if (key === "s") {
     direction = "down";
-    snakeY +=1;
+    //snakeY += 1;
   }
 
-  if (key === "d" && snakeX < cols - 1) {
+  if (key === "d") {
     direction = "right";
-    snakeX += 1
+    //snakeX += 1;
   }
 
   if (key === "a" && snakeX > 0) {
     direction = "left";
-    snakeX -= 1
+    //snakeX -= 1;
   }
   // put player back into grid
-  grid[snakeX][snakeY] = 1;
 }
 
 function createEmptyGrid() {
@@ -99,6 +98,7 @@ function displayGrid(grid, rows, cols) {
       else {
         fill(0);
       }
+      strokeWeight(0.5);
       rect(x*cellSize, y*cellSize, cellSize, cellSize);
     }
   }
@@ -106,27 +106,38 @@ function displayGrid(grid, rows, cols) {
 
 
 function updatefruit(){
+  let thisSegement = {
+    x: snakeX,
+    y: snakeY, 
+    size: width / cols
+  };
   if (grid[fruit.x][fruit.y] === grid[snakeX][snakeY]){
     fruit.x = floor(random(0, 30));
     fruit.y = floor(random(0, 30));
     grid[fruit.x][fruit.y] = 2;
     grid[fruit.x][fruit.y];
-    console.log(fruit.x, fruit.y);
-    console.log(direction);
+    //if W pushed it'll fire a rocket
+    snake.push(thisSegement); 
+
   }
 };
 
+
+
+
 function updateMovement(){
-    if (direction === "up"){
-        snakeY -= 1;
+  grid[snakeX][snakeY] = 0;
+  if (direction === "up" && snakeY > 0){
+    snakeY -= 1;
     }
-    if (direction === "down"){
-        snakeY += 1;
+  if (direction === "down" && snakeY < rows - 1){
+    snakeY += 1;      
     }
-    if (direction === "left"){
-        snakeX -= 1;
+  if (direction === "left" && snakeX > 0){
+    snakeX -= 1;
     }
-    if (direction === "right"){
-        snakeX += 1;
+  if (direction === "right" && snakeX < cols - 1){  
+    snakeX += +1;
     }
+  grid[snakeX][snakeY] = 1;
 };
