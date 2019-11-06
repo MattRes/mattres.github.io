@@ -23,12 +23,21 @@ let rows = 30;
 let cols = 30;
 let playerX = 15;
 let playerY = 15;
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 >>>>>>> parent of 99ad4c1... Snake game fruit spawning
 =======
 >>>>>>> parent of 99ad4c1... Snake game fruit spawning
+=======
+let fruit = {};
+>>>>>>> parent of b3cf2f2... Revert "Snake game fruit spawning"
 function setup() {
+  fruit = {
+    x: floor(random(0, 30)),
+    y: floor(random(0, 30))
+  };
+  
   if (windowWidth > windowHeight) {
     createCanvas(windowHeight, windowHeight);
   }
@@ -50,15 +59,21 @@ function draw() {
 =======
   grid = createEmptyGrid(cols, rows);
   grid[playerY][playerX] = 1;
+  grid[fruit.x][fruit.y] = 2;
 }
+
 
 function draw() {
   background(220);
   displayGrid(grid, rows, cols);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> parent of 99ad4c1... Snake game fruit spawning
 =======
 >>>>>>> parent of 99ad4c1... Snake game fruit spawning
+=======
+  updatefruit();
+>>>>>>> parent of b3cf2f2... Revert "Snake game fruit spawning"
 }
 
 
@@ -113,11 +128,15 @@ function displayGrid(grid, rows, cols) {
 =======
 >>>>>>> parent of 99ad4c1... Snake game fruit spawning
       }
+      else if (grid[y][x] === 2){
+        fill(255,0,0);
+      }
       else {
         someArray[i].push(0);
       }
     }
   }
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
   return someArray;
@@ -138,3 +157,16 @@ function updateFruit(){
 =======
 >>>>>>> parent of 99ad4c1... Snake game fruit spawning
 }
+=======
+}
+
+
+function updatefruit(){
+  grid[fruit.x][fruit.y];
+  if (grid[fruit.x][fruit.y] === grid[playerX][playerY]){
+    fruit.x = floor(random(0, 30));
+    fruit.y = floor(random(0, 30));
+    grid[fruit.x][fruit.y];
+  }
+};
+>>>>>>> parent of b3cf2f2... Revert "Snake game fruit spawning"
