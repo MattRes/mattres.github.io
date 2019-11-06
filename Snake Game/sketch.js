@@ -24,6 +24,9 @@ let cols = 30;
 let playerX = 15;
 let playerY = 15;
 
+<<<<<<< HEAD
+>>>>>>> parent of 99ad4c1... Snake game fruit spawning
+=======
 >>>>>>> parent of 99ad4c1... Snake game fruit spawning
 function setup() {
   if (windowWidth > windowHeight) {
@@ -52,6 +55,9 @@ function draw() {
 function draw() {
   background(220);
   displayGrid(grid, rows, cols);
+<<<<<<< HEAD
+>>>>>>> parent of 99ad4c1... Snake game fruit spawning
+=======
 >>>>>>> parent of 99ad4c1... Snake game fruit spawning
 }
 
@@ -102,6 +108,9 @@ function displayGrid(grid, rows, cols) {
     for (let x = 0; x < cols; x++) {
       if (grid[y][x] === 0) {
         fill(255);
+<<<<<<< HEAD
+>>>>>>> parent of 99ad4c1... Snake game fruit spawning
+=======
 >>>>>>> parent of 99ad4c1... Snake game fruit spawning
       }
       else {
@@ -109,6 +118,7 @@ function displayGrid(grid, rows, cols) {
       }
     }
   }
+<<<<<<< HEAD
 <<<<<<< HEAD
   return someArray;
 }
@@ -123,6 +133,8 @@ function updateFruit(){
   fill(0);
   rect(theGrid[10],theGrid[10], cellSize, cellSize);
   console.log("ran");
+=======
+>>>>>>> parent of 99ad4c1... Snake game fruit spawning
 =======
 >>>>>>> parent of 99ad4c1... Snake game fruit spawning
 }
