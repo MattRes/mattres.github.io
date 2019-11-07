@@ -14,8 +14,9 @@ let snakeY = 15;
 let snake = [];
 let fruit = {};
 let direction;
-
+let fr = 22.5;
 function setup() {
+  frameRate(fr);
   fruit = {
     x: floor(random(0, rows)),
     y: floor(random(0, cols))
@@ -37,10 +38,11 @@ function setup() {
 function draw() {
   background(220);
   displayGrid(grid, rows, cols);
-  updatefruit();
+  update();
   updateMovement();
   console.log(fruit.x, fruit.y);
   console.log(direction);
+  console.log(frameRate())
 }
 
 function windowResized() {
@@ -105,8 +107,8 @@ function displayGrid(grid, rows, cols) {
 }
 
 
-function updatefruit(){
-  let thisSegement = {
+function update(){
+  let thisSegment = {
     x: snakeX,
     y: snakeY, 
     size: width / cols
@@ -116,8 +118,13 @@ function updatefruit(){
     fruit.y = floor(random(0, 30));
     grid[fruit.x][fruit.y] = 2;
     grid[fruit.x][fruit.y];
-    //if W pushed it'll fire a rocket
-    snake.push(thisSegement); 
+
+    snake.push(thisSegment); 
+
+    for (thisSegment in snake){
+      rect(snakeX - 1, snakeY -1, width/cols, width/cols);
+      grid[thisSegment][thisSegment]
+    }
 
   }
 };
