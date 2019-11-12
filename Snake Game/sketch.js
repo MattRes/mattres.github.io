@@ -25,7 +25,7 @@ function setup() {
     x: floor(random(0, rows)),
     y: floor(random(0, cols))
   };
-  snakeBody.push(snake)
+  //snakeBody.push(snake)
 
   if (windowWidth > windowHeight) {
     createCanvas(windowHeight, windowHeight);
@@ -74,9 +74,7 @@ function keyPressed() {
 
   if (key === "a" || keyCode === LEFT_ARROW) {
     direction = "left";
-    //snakeX -= 1;
   }
-  // put player back into grid
 }
 
 function createEmptyGrid() {
@@ -114,22 +112,30 @@ function displayGrid(grid, rows, cols) {
 
 
 function update(){
-  let newSeg;
+  let seg;
+  let lastSeg; 
   let thisSegment = {
     x: snake.x,
     y: snake.y, 
     size: width / cols
   };
   if (grid[fruit.x][fruit.y] === grid[snake.x][snake.y]){
-    fruit.x = floor(random(0, 30));
-    fruit.y = floor(random(0, 30));
+    fruit.x = floor(random(0, cols));
+    fruit.y = floor(random(0, rows));
     grid[fruit.x][fruit.y] = 2;
     grid[fruit.x][fruit.y];
     score ++;
-    newSeg = snakeBody.unshift
-    console.log(newSeg);
     snakeBody.push(thisSegment); 
-
+    //console.log(thisSegment);
+    for (let i = 0; i < snakeBody.length; i++) {
+      // grid[snakeBody[i]][snakeBody[i]]= 1;
+      // grid[snakeBody[i].x][snakeBody[i].y];
+      // // lastSeg = snakeBody.shift()
+      // // console.log(lastSeg);
+      // // grid[lastSeg.x][lastSeg.y]= 1;
+      // // grid[lastSeg.x][lastSeg.y];
+      // console.log(snakeBody[i]);
+    }
   }
 };
 
