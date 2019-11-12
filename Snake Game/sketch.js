@@ -9,18 +9,23 @@
 let grid;
 let rows = 60;
 let cols = 60;
-let snakeX = 15;
-let snakeY = 15;
-let snake = [];
+let snake = {
+  x: 15,
+  y: 15
+};
+let snakeBody = [];
 let fruit = {};
 let direction;
 let fr = 22.5;
+let score = 0;
+
 function setup() {
   frameRate(fr);
   fruit = {
     x: floor(random(0, rows)),
     y: floor(random(0, cols))
   };
+  snakeBody.push(snake)
 
   if (windowWidth > windowHeight) {
     createCanvas(windowHeight, windowHeight);
@@ -29,7 +34,7 @@ function setup() {
     createCanvas(windowWidth, windowWidth);
   }
   grid = createEmptyGrid(cols, rows);
-  grid[snakeX][snakeY] = 1;
+  grid[snake.x][snake.y] = 1;
   grid[fruit.x][fruit.y] = 2;
   grid[fruit.x][fruit.y];
 }
@@ -40,9 +45,6 @@ function draw() {
   displayGrid(grid, rows, cols);
   update();
   updateMovement();
-  console.log(fruit.x, fruit.y);
-  console.log(direction);
-  console.log(frameRate())
 }
 
 function windowResized() {
@@ -53,23 +55,24 @@ function windowResized() {
     createCanvas(windowWidth, windowWidth);
   }
 }
+
 function keyPressed() {
   // remove player from current spot
-  if (key === "w") {
+  if (key === "w" || keyCode === UP_ARROW) {
     direction = "up";
     //snakeY -= 1;
   }
-  if (key === "s") {
+  if (key === "s" || keyCode === DOWN_ARROW) {
     direction = "down";
     //snakeY += 1;
   }
 
-  if (key === "d") {
+  if (key === "d" || keyCode === RIGHT_ARROW) {
     direction = "right";
     //snakeX += 1;
   }
 
-  if (key === "a" && snakeX > 0) {
+  if (key === "a" || keyCode === LEFT_ARROW) {
     direction = "left";
     //snakeX -= 1;
   }
@@ -104,27 +107,28 @@ function displayGrid(grid, rows, cols) {
       rect(x*cellSize, y*cellSize, cellSize, cellSize);
     }
   }
+  fill(255,0,0, 75)
+  textSize(24);
+  text("Score: " + score, 10,25)
 }
 
 
 function update(){
+  let newSeg;
   let thisSegment = {
-    x: snakeX,
-    y: snakeY, 
+    x: snake.x,
+    y: snake.y, 
     size: width / cols
   };
-  if (grid[fruit.x][fruit.y] === grid[snakeX][snakeY]){
+  if (grid[fruit.x][fruit.y] === grid[snake.x][snake.y]){
     fruit.x = floor(random(0, 30));
     fruit.y = floor(random(0, 30));
     grid[fruit.x][fruit.y] = 2;
     grid[fruit.x][fruit.y];
-
-    snake.push(thisSegment); 
-
-    for (thisSegment in snake){
-      rect(snakeX - 1, snakeY -1, width/cols, width/cols);
-      grid[thisSegment][thisSegment]
-    }
+    score ++;
+    newSeg = snakeBody.unshift
+    console.log(newSeg);
+    snakeBody.push(thisSegment); 
 
   }
 };
@@ -133,18 +137,24 @@ function update(){
 
 
 function updateMovement(){
-  grid[snakeX][snakeY] = 0;
-  if (direction === "up" && snakeY > 0){
-    snakeY -= 1;
+  grid[snake.x][snake.y] = 0;
+  if (direction === "up" && snake.y > 0){
+    snake.y -= 1;
     }
-  if (direction === "down" && snakeY < rows - 1){
-    snakeY += 1;      
+  if (direction === "down" && snake.y < rows - 1){
+    snake.y += 1;      
     }
-  if (direction === "left" && snakeX > 0){
-    snakeX -= 1;
+  if (direction === "left" && snake.x > 0){
+    snake.x -= 1;
     }
-  if (direction === "right" && snakeX < cols - 1){  
-    snakeX += +1;
+  if (direction === "right" && snake.x < cols - 1){  
+    snake.x += +1;
     }
-  grid[snakeX][snakeY] = 1;
+  grid[snake.x][snake.y] = 1;
+  if (direction === "up"){
+    direction != "down";
+  }
+  if (direction === "down"){
+    direction != "up";
+  }
 };
