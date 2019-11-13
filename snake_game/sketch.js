@@ -45,6 +45,7 @@ function draw() {
   displayGrid(grid, rows, cols);
   update();
   updateMovement();
+  console.log(snake.x, snake.y);
 }
 
 
@@ -112,7 +113,7 @@ function displayGrid(grid, rows, cols) {
   }
   fill(255,0,0, 75)
   textSize(24);
-  text("Score: " + snake.total, 10,25)
+  text("Score: " + score, 10,25)
 }
 
 
@@ -129,6 +130,7 @@ function update(){
     fruit.y = floor(random(0, rows));
     grid[fruit.x][fruit.y] = 2;
     grid[fruit.x][fruit.y];
+    score ++;
     snake.total++;
     snake.tail.push(thisSegment); 
     //console.log(thisSegment);
@@ -149,25 +151,27 @@ function updateMovement(){
   grid[snake.x][snake.y] = 0;
 
   //directional movement
-  if (direction === "up" && snake.y > 0){
+  if (direction === "up" && snake.y > -1){
     snake.y -= 1;
     }
-  if (direction === "down" && snake.y < rows - 1){
+  if (direction === "down" && snake.y < rows + 1){
     snake.y += 1;      
     }
-  if (direction === "left" && snake.x > 0){
+  if (direction === "left" && snake.x > -1){
     snake.x -= 1;
     }
-  if (direction === "right" && snake.x < cols - 1){  
+  if (direction === "right" && snake.x < cols +1){  
     snake.x += +1;
     }
   //puts snake back into grid
   grid[snake.x][snake.y] = 1;
 
-  if (direction === "up"){
-    direction != "down";
-  }
-  if (direction === "down"){
-    direction != "up";
-  }
+  // Code to enable walls/ boundaries (WIP)
+
+  // if (snake.x === 61 || snake.x === -1 || snake.y === -1 || snake.y === 61 ){
+  //   fill(0);
+  //   text("Gameover", width/height, width/height);
+  //   score = 0;
+  // }
+
 };
