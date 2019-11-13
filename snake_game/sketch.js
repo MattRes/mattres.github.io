@@ -1,38 +1,38 @@
-// Project Title
-// Your Name
-// Date
-//
-// Extra for Experts:
-// - describe what you did to take this project "above and beyond"
-// WASD in Grid Demo
+//Snake Game
+//Matthew Resendes
+// I was unable to get the snake to grow upon collecting a fruit, I spent roughly 3 and half hours
+// attempting to get it working but just couldn't.
 
 let grid;
 let rows = 60;
 let cols = 60;
 let snake = {
   x: 15,
-  y: 15
+  y: 15,
+  total: 0,
+  tail: []
 };
-let snakeBody = [];
 let fruit = {};
 let direction;
 let fr = 22.5;
 let score = 0;
 
 function setup() {
+  //sets frame rate
   frameRate(fr);
+
   fruit = {
     x: floor(random(0, rows)),
     y: floor(random(0, cols))
   };
-  //snakeBody.push(snake)
-
+  // creates window size to max number of rows or columns
   if (windowWidth > windowHeight) {
     createCanvas(windowHeight, windowHeight);
   }
   else {
     createCanvas(windowWidth, windowWidth);
   }
+  //creates empty grid and sets colors for snake and fruit aswell as makes first fruit
   grid = createEmptyGrid(cols, rows);
   grid[snake.x][snake.y] = 1;
   grid[fruit.x][fruit.y] = 2;
@@ -47,7 +47,9 @@ function draw() {
   updateMovement();
 }
 
+
 function windowResized() {
+  // updates window if it's resized
   if (windowWidth > windowHeight) {
     createCanvas(windowHeight, windowHeight);
   }
@@ -56,20 +58,19 @@ function windowResized() {
   }
 }
 
+
 function keyPressed() {
-  // remove player from current spot
+  // changes direction variable depending on key press
   if (key === "w" || keyCode === UP_ARROW) {
     direction = "up";
-    //snakeY -= 1;
+
   }
   if (key === "s" || keyCode === DOWN_ARROW) {
     direction = "down";
-    //snakeY += 1;
   }
 
   if (key === "d" || keyCode === RIGHT_ARROW) {
     direction = "right";
-    //snakeX += 1;
   }
 
   if (key === "a" || keyCode === LEFT_ARROW) {
@@ -77,7 +78,9 @@ function keyPressed() {
   }
 }
 
+
 function createEmptyGrid() {
+  //creates an empty grid
   let emptyGrid = [];
   for (let x = 0; x < cols; x++) {
     emptyGrid.push([]);
@@ -88,7 +91,9 @@ function createEmptyGrid() {
   return emptyGrid;
 }
 
+
 function displayGrid(grid, rows, cols) {
+  //displays square grid
   let cellSize = width / cols;
   for (let x = 0; x < rows; x++) {
     for (let y = 0; y < cols; y++) {
@@ -107,43 +112,43 @@ function displayGrid(grid, rows, cols) {
   }
   fill(255,0,0, 75)
   textSize(24);
-  text("Score: " + score, 10,25)
+  text("Score: " + snake.total, 10,25)
 }
 
 
 function update(){
-  let seg;
-  let lastSeg; 
   let thisSegment = {
     x: snake.x,
     y: snake.y, 
     size: width / cols
   };
+
   if (grid[fruit.x][fruit.y] === grid[snake.x][snake.y]){
+    // if snake XY is the same as fruit XY spawn new fruit add to score and snake total
     fruit.x = floor(random(0, cols));
     fruit.y = floor(random(0, rows));
     grid[fruit.x][fruit.y] = 2;
     grid[fruit.x][fruit.y];
-    score ++;
-    snakeBody.push(thisSegment); 
+    snake.total++;
+    snake.tail.push(thisSegment); 
     //console.log(thisSegment);
-    for (let i = 0; i < snakeBody.length; i++) {
-      // grid[snakeBody[i]][snakeBody[i]]= 1;
-      // grid[snakeBody[i].x][snakeBody[i].y];
-      // // lastSeg = snakeBody.shift()
-      // // console.log(lastSeg);
-      // // grid[lastSeg.x][lastSeg.y]= 1;
-      // // grid[lastSeg.x][lastSeg.y];
-      // console.log(snakeBody[i]);
-    }
+
+    // Below was me trying to get it to add on a snake tail (unsucessful)
+
+    // for (let i = 0; i <snake.total-1; i++) {
+    //   snake.tail[i] = snake.tail[i+1];
+    // }
+    // snake.tail[snake.total - 1] = grid[snake.x][snake.y]
+    // grid[snake.tail[i]][snake.tail[i]]
   }
 };
 
 
-
-
 function updateMovement(){
+  //takes snake out of grid
   grid[snake.x][snake.y] = 0;
+
+  //directional movement
   if (direction === "up" && snake.y > 0){
     snake.y -= 1;
     }
@@ -156,7 +161,9 @@ function updateMovement(){
   if (direction === "right" && snake.x < cols - 1){  
     snake.x += +1;
     }
+  //puts snake back into grid
   grid[snake.x][snake.y] = 1;
+
   if (direction === "up"){
     direction != "down";
   }
