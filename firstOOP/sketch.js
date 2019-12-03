@@ -49,13 +49,13 @@ class Particle {
     fill(255,0,0,this.alpha);
     circle(this.x, this.y, this.radius * 2);
   }
-  move() {
-    this.x += this.dx;
-    this.y += this.dy;
-    this.alpha -= 1;
-    this.dy += this.gravity;
-  }
-  isDone(){
-    return this.alpha <= 0;
-  }
 }
+//   move() {
+//     this.x += this.dx;
+//     this.y += this.dy;
+//     this.alpha -= 1;
+//     this.dy += this.gravity;
+//   }
+//   isDone(){
+//     return this.alpha <= 0;
+//   }
